@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { SessionService } from '../../../../core/service/session.service';
 import { TeacherService } from '../../../../core/service/teacher.service';
 import { Session } from '../../../../core/models/session.interface';
@@ -26,7 +27,7 @@ export class FormComponent implements OnInit {
 
   public onUpdate: boolean = false;
   public sessionForm: FormGroup | undefined;
-  public teachers$ = this.teacherService.all();
+  public teachers$: Observable<any> = this.teacherService.all();
   private id: string | undefined;
 
   ngOnInit(): void {
@@ -77,7 +78,7 @@ export class FormComponent implements OnInit {
         session ? session.description : '',
         [
           Validators.required,
-          Validators.max(2000)
+          Validators.maxLength(2000)
         ]
       ],
     });

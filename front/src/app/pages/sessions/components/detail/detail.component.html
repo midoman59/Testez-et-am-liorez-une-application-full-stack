@@ -1,5 +1,5 @@
 <div class="m3">
-  @if (session) {
+  @if (session$ | async; as session) {
     <mat-card>
       <mat-card-title>
         <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -31,7 +31,7 @@
           </div>
         </div>
       </mat-card-title>
-      @if (teacher) {
+      @if (teacher$ | async; as teacher) {
         <mat-card-subtitle>
           <div fxLayoutAlign="start center" class="ml3">
             <mat-icon>people</mat-icon>

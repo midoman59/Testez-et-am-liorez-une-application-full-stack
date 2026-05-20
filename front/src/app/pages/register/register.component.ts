@@ -29,24 +29,24 @@ export class RegisterComponent {
       '',
       [
         Validators.required,
-        Validators.min(3),
-        Validators.max(20)
+        Validators.minLength(3),
+        Validators.maxLength(20)
       ]
     ],
     lastName: [
       '',
       [
         Validators.required,
-        Validators.min(3),
-        Validators.max(20)
+        Validators.minLength(3),
+        Validators.maxLength(20)
       ]
     ],
     password: [
       '',
       [
         Validators.required,
-        Validators.min(3),
-        Validators.max(40)
+        Validators.minLength(3),
+        Validators.maxLength(40)
       ]
     ]
   });
@@ -54,11 +54,11 @@ export class RegisterComponent {
 
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;
-    this.authService.register(registerRequest).subscribe({
-        next: (_: void) => this.router.navigate(['/login']),
-        error: _ => this.onError = true,
-      }
-    );
+    this.authService.register(registerRequest)
+      .subscribe({
+        next: () => this.router.navigate(['/login']),
+        error: () => this.onError = true,
+      });
   }
 
 }
