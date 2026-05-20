@@ -1,5 +1,6 @@
 package com.openclassrooms.starterjwt.services;
 
+import com.openclassrooms.starterjwt.exception.NotFoundException;
 import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,13 @@ public class TeacherService {
 
     public Teacher findById(Long id) {
         return this.teacherRepository.findById(id).orElse(null);
+    }
+
+    public Teacher findByIdOrThrow(Long id) {
+        Teacher teacher = this.findById(id);
+        if (teacher == null) {
+            throw new NotFoundException();
+        }
+        return teacher;
     }
 }
