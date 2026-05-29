@@ -52,6 +52,7 @@ class SessionControllerIT {
     private ObjectMapper objectMapper;
 
     private Teacher teacher;
+    private Teacher teacherForCreate;
     private User user1;
     private User user2;
     private Session session;
@@ -66,6 +67,11 @@ class SessionControllerIT {
         teacher.setLastName("Dupont");
         teacher.setFirstName("Jean");
         teacherRepository.save(teacher);
+
+        teacherForCreate = new Teacher();
+        teacherForCreate.setLastName("Martin");
+        teacherForCreate.setFirstName("Marie");
+        teacherRepository.save(teacherForCreate);
 
         user1 = new User();
         user1.setEmail("user1@test.com");
@@ -121,7 +127,7 @@ class SessionControllerIT {
         createDto.setName("Yoga Soir");
         createDto.setDate(new Date());
         createDto.setDescription("Description du yoga soir");
-        createDto.setTeacher_id(teacher.getId());
+        createDto.setTeacher_id(teacherForCreate.getId());
 
         mockMvc.perform(post("/api/session")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -137,7 +143,7 @@ class SessionControllerIT {
         updateDto.setName("Yoga Matinal Updated");
         updateDto.setDate(new Date());
         updateDto.setDescription("Updated description");
-        updateDto.setTeacher_id(teacher.getId());
+        updateDto.setTeacher_id(teacherForCreate.getId());
 
         mockMvc.perform(put("/api/session/" + session.getId())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -180,7 +186,7 @@ class SessionControllerIT {
         mockMvc.perform(get("/api/session/" + session.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.users", hasSize(1)))
-                .andExpect(jsonPath("$.users[0].id").value(user1.getId()));
+                .andExpect(jsonPath("$.users[0]").value(user1.getId()));
     }
 
     @Test

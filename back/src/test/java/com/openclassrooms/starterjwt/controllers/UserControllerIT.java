@@ -1,6 +1,7 @@
 package com.openclassrooms.starterjwt.controllers;
 
 import com.openclassrooms.starterjwt.models.User;
+import com.openclassrooms.starterjwt.repository.SessionRepository;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,12 +31,16 @@ class UserControllerIT {
     private UserRepository userRepository;
 
     @Autowired
+    private SessionRepository sessionRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     private User user;
 
     @BeforeEach
     void setUp() {
+        sessionRepository.deleteAll();
         userRepository.deleteAll();
 
         user = new User();

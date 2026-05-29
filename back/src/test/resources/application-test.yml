@@ -22,7 +22,7 @@ spring:
 oc:
   app:
     jwtExpirationMs: 86400000
-    jwtSecret: testSecretKeyForJwtTokenGenerationAndValidationInTestEnvironmentMustBeLongEnough
+    jwtSecret: testSecretKeyForJwtTokenGenerationAndValidationInTestEnvironmentMustBeLongEnoughForHS512MinimumRequirement!!!
 
 logging:
   level:

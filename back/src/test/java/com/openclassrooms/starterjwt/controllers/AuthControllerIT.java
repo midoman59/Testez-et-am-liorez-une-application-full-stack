@@ -5,6 +5,7 @@ import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.payload.request.LoginRequest;
 import com.openclassrooms.starterjwt.payload.request.SignupRequest;
 import com.openclassrooms.starterjwt.repository.UserRepository;
+import com.openclassrooms.starterjwt.repository.SessionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ class AuthControllerIT {
     private UserRepository userRepository;
 
     @Autowired
+    private SessionRepository sessionRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -39,6 +43,7 @@ class AuthControllerIT {
 
     @BeforeEach
     void setUp() {
+        sessionRepository.deleteAll();
         userRepository.deleteAll();
 
         User adminUser = new User();
@@ -92,7 +97,7 @@ class AuthControllerIT {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").value(notNullValue()))
                 .andExpect(jsonPath("$.id").value(notNullValue()))
-                .andExpect(jsonPath("$.email").value("admin@test.com"))
+                .andExpect(jsonPath("$.username").value("admin@test.com"))
                 .andExpect(jsonPath("$.firstName").value("Admin"))
                 .andExpect(jsonPath("$.lastName").value("User"))
                 .andExpect(jsonPath("$.admin").value(true));
