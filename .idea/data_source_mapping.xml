@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/back/src/main/resources/sql/insert_user.sql" value="9cded78d-b14e-41e4-8102-fc55e02934e5" />
+  </component>
+</project>
