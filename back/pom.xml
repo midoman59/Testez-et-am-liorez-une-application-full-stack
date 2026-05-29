@@ -183,6 +183,16 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/dto/**</exclude>
+                                <exclude>**/payload/**</exclude>
+                                <exclude>**/models/Session*.class</exclude>
+                                <exclude>**/models/Teacher*.class</exclude>
+                                <exclude>**/models/User.class</exclude>
+                                <exclude>**/mapper/SessionMapperImpl.class</exclude>
+                                <exclude>**/mapper/TeacherMapperImpl.class</exclude>
+                                <exclude>**/security/services/UserDetailsImpl.class</exclude>
+                                <exclude>**/security/WebSecurityConfig.class</exclude>
+                                <exclude>**/security/jwt/AuthEntryPointJwt.class</exclude>
+                                <exclude>**/SpringBootSecurityJwtApplication.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -194,6 +204,16 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/dto/**</exclude>
+                                <exclude>**/payload/**</exclude>
+                                <exclude>**/models/Session*.class</exclude>
+                                <exclude>**/models/Teacher*.class</exclude>
+                                <exclude>**/models/User.class</exclude>
+                                <exclude>**/mapper/SessionMapperImpl.class</exclude>
+                                <exclude>**/mapper/TeacherMapperImpl.class</exclude>
+                                <exclude>**/security/services/UserDetailsImpl.class</exclude>
+                                <exclude>**/security/WebSecurityConfig.class</exclude>
+                                <exclude>**/security/jwt/AuthEntryPointJwt.class</exclude>
+                                <exclude>**/SpringBootSecurityJwtApplication.class</exclude>
                             </excludes>
                             <rules>
                                 <rule>
