@@ -199,6 +199,20 @@ npm run e2e:ci
 
 Cette commande exécute Cypress en mode headless contre l'application instrumentée pour la couverture.
 
+Pour un lancement manuel plus explicite, vous pouvez aussi faire :
+
+```powershell
+cd front
+ng run yoga:serve-coverage --port 4300
+```
+
+puis, dans un second terminal :
+
+```powershell
+cd front
+npm run e2e:run
+```
+
 Les scénarios couverts actuellement sont :
 - Login : connexion, erreur d'authentification, champs obligatoires
 - Register : création de compte, erreur de validation

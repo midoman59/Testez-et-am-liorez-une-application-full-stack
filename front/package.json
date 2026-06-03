@@ -10,7 +10,8 @@
     "e2e:ci": "ng run yoga:e2e-ci",
     "e2e:coverage": "npx nyc report --reporter=lcov --reporter=text-summary",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "e2e:run": "cypress run --config baseUrl=http://localhost:4300"
   },
   "private": true,
   "dependencies": {
