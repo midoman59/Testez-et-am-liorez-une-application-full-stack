@@ -67,6 +67,22 @@ cd Testez-et-am-liorez-une-application-full-stack
 
 Assurez-vous que **Docker Desktop est démarré** avant de lancer l'application.
 
+### 3. Installer et utiliser le frontend
+
+```powershell
+cd front
+npm install
+```
+
+Une fois les dépendances installées, vous pouvez démarrer le frontend Angular avec :
+
+```powershell
+cd front
+npm run start
+```
+
+Le frontend est alors disponible sur `http://localhost:4200`.
+
 ---
 
 ## 🚀 Lancer l'application
@@ -172,6 +188,23 @@ Remarques :
 
 Si vous utilisez `npm` et que les scripts sont configurés (voir `front/package.json`), adaptez la commande `npm test` en conséquence.
 
+### Frontend - Tests end-to-end (Cypress)
+
+Les tests E2E valident le comportement complet de l'application front côté navigateur. Pour les lancer :
+
+```powershell
+cd front
+npm run e2e:ci
+```
+
+Cette commande exécute Cypress en mode headless contre l'application instrumentée pour la couverture.
+
+Les scénarios couverts actuellement sont :
+- Login : connexion, erreur d'authentification, champs obligatoires
+- Register : création de compte, erreur de validation
+- Sessions : liste, détail, création, modification, suppression, participation
+- Account / Logout : affichage du compte et déconnexion
+
 ## 📊 Générer les rapports de couverture
 
 ### Rapport de couverture JaCoCo (Backend)
@@ -228,6 +261,33 @@ Functions  : 90.00% (cc/dd)
 Lines      : 83.33% (ee/ff)
 
 Présentez ces lignes au mentor comme preuve rapide, puis ouvrez le HTML pour les détails par fichier/ligne.
+
+### Rapport de couverture Cypress / E2E (Frontend)
+
+Après avoir exécuté les tests E2E, générez le rapport de couverture front avec :
+
+```powershell
+cd front
+npm run e2e:coverage
+```
+
+Le rapport HTML est ensuite disponible ici :
+
+```powershell
+front/coverage/lcov-report/index.html
+```
+
+Vous pouvez l'ouvrir directement sous Windows avec :
+
+```powershell
+Start-Process ".\coverage\lcov-report\index.html"
+```
+
+Le résumé console doit montrer au minimum 80 % sur :
+- Statements
+- Branches
+- Functions
+- Lines
 
 ### Vérifier les métriques de couverture
 
@@ -352,7 +412,8 @@ mvn dependency:tree
 
 - Le frontend contient désormais des instructions de tests unitaires et de couverture (Jest) dans ce fichier.
 - Les commandes pour lancer les tests front et générer les rapports de couverture sont indiquées dans la section "Lancer les tests" et "Générer les rapports de couverture" ci‑dessus.
-- Les rapports de couverture couvrent désormais le backend (JaCoCo) et le frontend (Jest).
+- Les rapports de couverture couvrent désormais le backend (JaCoCo) et le frontend, à la fois avec Jest et Cypress/E2E.
+- Le critère demandé est respecté lorsque les tests front passent sans erreur et que la couverture front/E2E dépasse 80 % sur les indicateurs principaux.
 
 ---
 
