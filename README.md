@@ -152,6 +152,26 @@ mvn failsafe:integration-test
 
 ---
 
+### Frontend - Tests unitaires (Jest)
+
+Le frontend est développé avec Angular et utilise Jest pour les tests unitaires. Pour exécuter les tests depuis la racine du projet, ouvrez un terminal PowerShell et lancez :
+
+```powershell
+cd front
+# Avec npm (recommandé)
+npm test -- --coverage --runInBand
+
+# Ou directement avec npx jest
+npx jest --coverage --runInBand
+```
+
+Remarques :
+- L'option `--coverage` force la collecte de la couverture même si `collectCoverage` est désactivé dans la configuration.
+- `--runInBand` exécute les tests sans fork (utile pour des logs lisibles en CI ou en local).
+- Pour exécuter un test spécifique : `npx jest path/to/file.spec.ts -t "nom du test"`
+
+Si vous utilisez `npm` et que les scripts sont configurés (voir `front/package.json`), adaptez la commande `npm test` en conséquence.
+
 ## 📊 Générer les rapports de couverture
 
 ### Rapport de couverture JaCoCo (Backend)
@@ -181,6 +201,33 @@ mvn clean test jacoco:report
 ```
 
 Puis ouvrez manuellement `target/site/jacoco/index.html` dans votre navigateur.
+
+### Rapport de couverture Jest (Frontend)
+
+Le frontend génère un rapport de couverture via Jest. Par défaut le dossier est défini dans la configuration Jest (ex. `coverage/jest`). Pour générer et ouvrir le rapport HTML :
+
+```powershell
+cd front
+# Exécutez les tests et générez la couverture
+npm test -- --coverage --runInBand
+
+# Ouvrir le rapport HTML (PowerShell)
+Start-Process "./coverage/jest/index.html"
+```
+
+Options utiles :
+- Obtenir uniquement le résumé texte : `npx jest --coverage --coverageReporters=text-summary`
+- Forcer dossier et reporters : `npx jest --coverage --coverageDirectory=coverage/jest --coverageReporters=html,text-summary`
+- Si le rapport HTML n'apparaît pas, vérifiez que tous les tests passent correctement.
+
+Ce que présente Jest dans la console après exécution (exemple) :
+
+Statements : 82.35% (xx/yy)
+Branches   : 78.12% (aa/bb)
+Functions  : 90.00% (cc/dd)
+Lines      : 83.33% (ee/ff)
+
+Présentez ces lignes au mentor comme preuve rapide, puis ouvrez le HTML pour les détails par fichier/ligne.
 
 ### Vérifier les métriques de couverture
 
@@ -303,9 +350,9 @@ mvn dependency:tree
 
 ## 📝 Notes
 
-- Le frontend sera intégré ultérieurement
-- Actuellement, seul le backend est documenté et testé
-- Les rapports de couverture se concentrent sur le backend
+- Le frontend contient désormais des instructions de tests unitaires et de couverture (Jest) dans ce fichier.
+- Les commandes pour lancer les tests front et générer les rapports de couverture sont indiquées dans la section "Lancer les tests" et "Générer les rapports de couverture" ci‑dessus.
+- Les rapports de couverture couvrent désormais le backend (JaCoCo) et le frontend (Jest).
 
 ---
 
@@ -313,5 +360,5 @@ mvn dependency:tree
 
 Pour toute question ou problème, consultez la documentation spécifique :
 - Backend : `back/README.md`
-- Frontend : `front/README.md` (à venir)
+- Frontend : `front/README.md` (peut contenir des compléments)
 
